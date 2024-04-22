@@ -1,0 +1,16 @@
+node_modules/
+build/
+dist/
+coverage/
+*.js
+doc/
+.config/
+logs/
+.cache/
+.env
+.env.local
+.env.*.local
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local

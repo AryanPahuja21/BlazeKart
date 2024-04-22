@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "This is the backend for the BlazeKart e-commerce website.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "dev": "nodemon src/index.js"
   },
   "author": "Aryan Pahuja",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  }
 }
