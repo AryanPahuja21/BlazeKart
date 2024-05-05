@@ -10,8 +10,8 @@ export default function Navbar() {
 
   const navlinks = [
     {
-      labe: "Collections",
-      link: "#",
+      labe: "Explore",
+      link: "/explore",
     },
     {
       labe: "Men",
@@ -45,8 +45,8 @@ export default function Navbar() {
           {navlinks.map((d, i) => (
             <Link
               key={i}
-              class="group text-white transition-all duration-300 ease-in-out no-underline"
-              href={d.link}
+              class="hidden lg:block group text-white transition-all duration-300 ease-in-out no-underline"
+              to={d.link}
             >
               <span class="bg-left-bottom bg-gradient-to-r from-yellow-300 to-yellow-800 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
                 {d.labe}
@@ -58,7 +58,7 @@ export default function Navbar() {
         {/* sidebar mobile menu */}
         <div
           className={clsx(
-            " fixed h-full w-screen lg:hidden bg-black/50 backdrop-blur-sm top-0 right-0  -translate-x-full  transition-all z-10 ",
+            " fixed h-full w-screen lg:hidden bg-black/50 top-0 right-0 -translate-x-full  transition-all z-10 ",
             isSideMenuOpen && "translate-x-0"
           )}
         >
@@ -69,8 +69,14 @@ export default function Navbar() {
             />
 
             {navlinks.map((d, i) => (
-              <Link key={i} className="font-bold" href={d.link}>
-                {d.labe}
+              <Link
+                key={i}
+                className="font-bold group text-white transition-all duration-300 ease-in-out no-underline"
+                href={d.link}
+              >
+                <span className="bg-left-bottom bg-gradient-to-r from-yellow-300 to-yellow-800 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
+                  {d.labe}
+                </span>
               </Link>
             ))}
           </section>
@@ -82,7 +88,7 @@ export default function Navbar() {
           <Link to="/cart">
             <AiOutlineShoppingCart className="text-2xl text-yellow-300 cursor-pointer hover:scale-125" />
           </Link>
-
+          {/* TODO: Add cart quantity red icon on the top right of cart icon */}
           <img
             className="h-10 w-10 rounded-full border-2 border-yellow-300 cursor-pointer"
             src="https://i.pravatar.cc/150?img=52"
