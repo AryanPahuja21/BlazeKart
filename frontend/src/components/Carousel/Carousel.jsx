@@ -22,21 +22,21 @@ function ControlledCarousel() {
       <Carousel.Item>
         <img
           src={Image1}
-          className="d-block w-[95vw] mx-auto h-auto bg-[#EEEEEE]"
+          className="d-block w-[90vw] mx-auto h-auto bg-[#EEEEEE]"
           alt="First slide"
         />
       </Carousel.Item>
       <Carousel.Item>
         <img
           src={Image2}
-          className="d-block w-[95vw] mx-auto h-auto"
+          className="d-block w-[90vw] mx-auto h-auto"
           alt="Second slide"
         />
       </Carousel.Item>
       <Carousel.Item>
         <img
           src={Image3}
-          className="d-block w-[95vw] mx-auto h-auto"
+          className="d-block w-[90vw] mx-auto h-auto"
           alt="Third slide"
         />
       </Carousel.Item>
