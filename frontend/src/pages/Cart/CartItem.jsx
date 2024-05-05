@@ -14,22 +14,22 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="flex justify-between my-4 ml-10 p-8 rounded-md drop-shadow-lg bg-[#EEEEEE]">
+    <div className="flex justify-between my-4 lg:ml-10 px-4 py-3 rounded-md drop-shadow-lg bg-white">
       <div className="flex">
         <img src={image} alt="" className="w-24 mr-4 h-24 rounded-md" />
         <div>
-          <h3>{name}</h3>
-          <p>₹{price}</p>
+          <p className="font-bold lg:text-xl">{name}</p>
+          <p className="lg:text-lg">₹{price}</p>
         </div>
       </div>
       <div className="flex items-center">
         <button
-          className="border border-gray-300 rounded-md px-2 py-1 mr-2"
+          className="border border-gray-300 rounded-md px-2 py-1 lg:mr-2"
           onClick={handleSubtract}
         >
           -
         </button>
-        <button className="border border-gray-300 rounded-md px-2 py-1 mr-2">
+        <button className="border border-gray-300 rounded-md px-2 py-1 lg:mr-2">
           {itemQuantity}
         </button>
         <button

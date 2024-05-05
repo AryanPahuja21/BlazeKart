@@ -44,13 +44,16 @@ const Cart = () => {
   return (
     <>
       <Navbar />
-      <div className="grid grid-cols-9">
-        <main className="col-span-6 p-10">
+      <div className="grid grid-cols-1  lg:grid-cols-9 justify-center bg-[#EEEEEE]">
+        <main className="col-span-6 px-7">
+          <h1 className="text-2xl font-bold text-black/70 w-fit sm:mx-auto mt-4 lg:mt-12 lg:ml-10">
+            My Cart
+          </h1>
           {cartItems.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}
         </main>
-        <aside className="my-10 mx-24 w-80 col-span-3 p-4 rounded-md drop-shadow-lg bg-[#EEEEEE]">
+        <aside className="my-24 mx-auto lg:mx-24 w-80 h-fit col-span-3 p-6 rounded-md drop-shadow-lg bg-white">
           <h2 className="text-lg font-semibold">Order Summary</h2>
           <div className="flex items-center justify-between mt-4">
             <span>Subtotal</span>
@@ -79,14 +82,14 @@ const Cart = () => {
           <input
             type="text"
             placeholder="Enter coupon code"
-            className="px-4 py-2 mb-1 border border-gray-300 rounded-md"
+            className="px-4 py-2 my-1 border border-gray-300 rounded-md"
             value={couponCode}
             onChange={(e) => setCouponCode(e.target.value)}
           />
           {couponCode &&
             (isValidCoupon ? (
               <>
-                <div className="flex items-center justify-between px-4 py-2 text-green-600 bg-green-100 border border-green-200 rounded-md">
+                <div className="flex items-center justify-between px-2 py-2 text-green-600 bg-green-100 border border-green-200 rounded-md">
                   <span className="flex items-center space-x-1">
                     <SiTicktick />
                     <span>Coupon code applied!</span>

@@ -29,7 +29,7 @@ export default function Navbar() {
 
   return (
     <main>
-      <nav className="flex justify-between px-8 items-center py-3 bg-black/90 mb-4">
+      <nav className="flex justify-between px-8 items-center py-3 bg-black/90">
         <div className="flex items-center gap-8">
           <section className="flex items-center gap-4">
             {/* menu */}

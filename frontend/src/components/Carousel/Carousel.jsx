@@ -17,7 +17,7 @@ function ControlledCarousel() {
       activeIndex={index}
       onSelect={handleSelect}
       interval={2000}
-      className="z-0"
+      className="z-0 pt-4"
     >
       <Carousel.Item>
         <img
