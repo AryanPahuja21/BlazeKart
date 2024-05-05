@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
+import { SiTicktick } from "react-icons/si";
 import CartItem from "./CartItem";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -44,12 +45,12 @@ const Cart = () => {
     <>
       <Navbar />
       <div className="grid grid-cols-9">
-        <main className="col-span-6 p-24">
+        <main className="col-span-6 p-10">
           {cartItems.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}
         </main>
-        <aside className="m-24 w-80 col-span-3">
+        <aside className="my-10 mx-24 w-80 col-span-3 p-4 rounded-md drop-shadow-lg bg-[#EEEEEE]">
           <h2 className="text-lg font-semibold">Order Summary</h2>
           <div className="flex items-center justify-between mt-4">
             <span>Subtotal</span>
@@ -87,6 +88,7 @@ const Cart = () => {
               <>
                 <div className="flex items-center justify-between px-4 py-2 text-green-600 bg-green-100 border border-green-200 rounded-md">
                   <span className="flex items-center space-x-1">
+                    <SiTicktick />
                     <span>Coupon code applied!</span>
                   </span>
                   <button
@@ -109,7 +111,7 @@ const Cart = () => {
                 </div>
               </>
             ) : (
-              <div className="flex items-center justify-between px-4 py-2 text-red-600 bg-red-100 border border-red-200 rounded-md">
+              <div className="flex items-center justify-between px-2 py-2 text-red-600 bg-red-100 border border-red-200 rounded-md">
                 <span className="flex items-center space-x-1">
                   <VscError />
                   <span>Invalid coupon code!</span>

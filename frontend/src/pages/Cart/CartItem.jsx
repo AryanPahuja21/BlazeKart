@@ -14,9 +14,9 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="flex justify-between my-4">
+    <div className="flex justify-between my-4 ml-10 p-8 rounded-md drop-shadow-lg bg-[#EEEEEE]">
       <div className="flex">
-        <img src={image} alt="" className="w-24 mr-4 h-24" />
+        <img src={image} alt="" className="w-24 mr-4 h-24 rounded-md" />
         <div>
           <h3>{name}</h3>
           <p>₹{price}</p>
