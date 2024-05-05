@@ -45,10 +45,12 @@ export default function Navbar() {
           {navlinks.map((d, i) => (
             <Link
               key={i}
-              className="hidden lg:block  text-gray-400 hover:text-black"
+              class="group text-white transition-all duration-300 ease-in-out no-underline"
               href={d.link}
             >
-              {d.labe}
+              <span class="bg-left-bottom bg-gradient-to-r from-yellow-300 to-yellow-800 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
+                {d.labe}
+              </span>
             </Link>
           ))}
         </div>
@@ -77,9 +79,9 @@ export default function Navbar() {
         {/* last section */}
         <section className="flex items-center gap-4">
           {/* cart icon */}
-          <AiOutlineShoppingCart className="text-2xl text-gray-300" />
+          <AiOutlineShoppingCart className="text-2xl text-yellow-300 cursor-pointer hover:scale-125" />
           <img
-            className="h-10 w-10 rounded-full border-2 border-white"
+            className="h-10 w-10 rounded-full border-2 border-yellow-300 cursor-pointer"
             src="https://i.pravatar.cc/150?img=52"
             alt="avatar-img"
           />
