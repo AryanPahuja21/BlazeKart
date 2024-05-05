@@ -79,7 +79,10 @@ export default function Navbar() {
         {/* last section */}
         <section className="flex items-center gap-4">
           {/* cart icon */}
-          <AiOutlineShoppingCart className="text-2xl text-yellow-300 cursor-pointer hover:scale-125" />
+          <Link to="/cart">
+            <AiOutlineShoppingCart className="text-2xl text-yellow-300 cursor-pointer hover:scale-125" />
+          </Link>
+
           <img
             className="h-10 w-10 rounded-full border-2 border-yellow-300 cursor-pointer"
             src="https://i.pravatar.cc/150?img=52"
