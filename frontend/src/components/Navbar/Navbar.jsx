@@ -58,7 +58,7 @@ export default function Navbar() {
         {/* sidebar mobile menu */}
         <div
           className={clsx(
-            " fixed h-full w-screen lg:hidden bg-black/50 top-0 right-0 -translate-x-full  transition-all z-[9999] ",
+            " fixed h-full w-screen lg:hidden bg-black/50 top-0 right-0 -translate-x-full transition-all z-[9999] ",
             isSideMenuOpen && "translate-x-0"
           )}
         >
@@ -79,6 +79,14 @@ export default function Navbar() {
                 </span>
               </Link>
             ))}
+            <div>
+              <Link
+                to="/signup"
+                className="text-white hover:text-yellow-300 font-semibold no-underline"
+              >
+                BECOME A SELLER
+              </Link>
+            </div>
           </section>
         </div>
 
@@ -86,13 +94,13 @@ export default function Navbar() {
         <section className="flex items-center gap-4">
           <Link
             to="/signup"
-            className="hidden lg:block text-white font-semibold no-underline"
+            className="hidden lg:block text-white hover:text-yellow-300 mx-4 font-semibold no-underline"
           >
             BECOME A SELLER
           </Link>
           {/* cart icon */}
           <Link to="/cart">
-            <AiOutlineShoppingCart className="text-2xl text-yellow-300 cursor-pointer hover:scale-125" />
+            <AiOutlineShoppingCart className="text-2xl text-yellow-300 mx-4 cursor-pointer hover:scale-125" />
           </Link>
           {/* TODO: Add cart quantity red icon on the top right of cart icon */}
           <img

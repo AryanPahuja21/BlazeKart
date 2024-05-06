@@ -47,7 +47,7 @@ const Cart = () => {
       <Navbar />
       <div className="grid grid-cols-1  lg:grid-cols-9 justify-center bg-[#EEEEEE]">
         <main className="col-span-6 px-7">
-          <h1 className="text-2xl font-bold text-black/70 w-fit sm:mx-auto mt-10 lg:ml-10">
+          <h1 className="text-2xl font-bold text-black/70 w-fit sm:mx-auto mt-12 lg:ml-10">
             My Cart
           </h1>
           {cartItems.map((item) => (
