@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { VscError } from "react-icons/vsc";
 import { SiTicktick } from "react-icons/si";
 import CartItem from "./CartItem";
@@ -46,14 +47,14 @@ const Cart = () => {
       <Navbar />
       <div className="grid grid-cols-1  lg:grid-cols-9 justify-center bg-[#EEEEEE]">
         <main className="col-span-6 px-7">
-          <h1 className="text-2xl font-bold text-black/70 w-fit sm:mx-auto mt-4 lg:mt-12 lg:ml-10">
+          <h1 className="text-2xl font-bold text-black/70 w-fit sm:mx-auto mt-10 lg:ml-10">
             My Cart
           </h1>
           {cartItems.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}
         </main>
-        <aside className="my-24 mx-auto lg:mx-24 w-80 h-fit col-span-3 p-6 rounded-md drop-shadow-lg bg-white">
+        <aside className="my-14 lg:my-24 mx-auto lg:mx-24 w-80 h-fit col-span-3 p-6 rounded-md drop-shadow-lg bg-white">
           <h2 className="text-lg font-semibold">Order Summary</h2>
           <div className="flex items-center justify-between mt-4">
             <span>Subtotal</span>
@@ -129,9 +130,11 @@ const Cart = () => {
                 </button>
               </div>
             ))}
-          <button className="w-full py-2 mt-4 text-white bg-black/90 rounded-md">
-            Proceed to Checkout
-          </button>
+          <Link to="/checkout">
+            <button className="w-full py-2 mt-4 text-white bg-black/90 rounded-md">
+              Proceed to Checkout
+            </button>
+          </Link>
         </aside>
       </div>
     </>

@@ -1,20 +1,21 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import Checkout from "./pages/Checkout/Checkout";
+import Loader from "./components/Loader/Loader";
 
 const Home = lazy(() => import("./pages/Home/Home"));
-const About = lazy(() => import("./pages/Explore/Explore"));
-const Contact = lazy(() => import("./pages/Cart/Cart"));
+const Explore = lazy(() => import("./pages/Explore/Explore"));
+const Cart = lazy(() => import("./pages/Cart/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout/Checkout"));
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 function App() {
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/explore" element={<About />} />
-          <Route path="/cart" element={<Contact />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

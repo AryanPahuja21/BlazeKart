@@ -18,7 +18,7 @@ const CartItem = ({ item }) => {
       <div className="flex">
         <img src={image} alt="" className="w-24 mr-4 h-24 rounded-md" />
         <div>
-          <p className="font-bold lg:text-xl">{name}</p>
+          <h3 className="font-bold lg:text-xl">{name}</h3>
           <p className="lg:text-lg">₹{price}</p>
         </div>
       </div>

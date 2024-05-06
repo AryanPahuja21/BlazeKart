@@ -14,8 +14,8 @@ export default function Navbar() {
       link: "/explore",
     },
     {
-      labe: "Men",
-      link: "#",
+      labe: "Top Deals Today",
+      link: "/top-deals",
     },
     {
       labe: "About",
@@ -28,7 +28,7 @@ export default function Navbar() {
   ];
 
   return (
-    <main>
+    <main className="sticky top-0">
       <nav className="flex justify-between px-8 items-center py-3 bg-black/90">
         <div className="flex items-center gap-8">
           <section className="flex items-center gap-4">
@@ -38,17 +38,17 @@ export default function Navbar() {
               className="text-3xl cursor-pointer lg:hidden text-white"
             />
             {/* logo */}
-            <Link to="/" className="w-32">
+            <Link to="/" className="w-32 mr-48">
               <img src="/logo.png" alt="" />
             </Link>
           </section>
           {navlinks.map((d, i) => (
             <Link
               key={i}
-              class="hidden lg:block group text-white transition-all duration-300 ease-in-out no-underline"
+              className="hidden lg:block mx-3 group text-white transition-all duration-300 ease-in-out no-underline"
               to={d.link}
             >
-              <span class="bg-left-bottom bg-gradient-to-r from-yellow-300 to-yellow-800 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
+              <span className="bg-left-bottom bg-gradient-to-r from-yellow-300 to-yellow-800 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
                 {d.labe}
               </span>
             </Link>
@@ -72,7 +72,7 @@ export default function Navbar() {
               <Link
                 key={i}
                 className="font-bold group text-white transition-all duration-300 ease-in-out no-underline"
-                href={d.link}
+                to={d.link}
               >
                 <span className="bg-left-bottom bg-gradient-to-r from-yellow-300 to-yellow-800 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out">
                   {d.labe}
@@ -84,6 +84,9 @@ export default function Navbar() {
 
         {/* last section */}
         <section className="flex items-center gap-4">
+          <Link to="/signup" className="text-white font-semibold no-underline">
+            BECOME A SELLER
+          </Link>
           {/* cart icon */}
           <Link to="/cart">
             <AiOutlineShoppingCart className="text-2xl text-yellow-300 cursor-pointer hover:scale-125" />
