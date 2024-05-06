@@ -5,7 +5,7 @@ import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
   return (
-    <div className="bg-[#EEEEEE] h-[200vh]">
+    <div className="bg-[#EEEEEE]">
       <Navbar />
       <Carousel />
       <Footer />

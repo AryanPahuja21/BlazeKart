@@ -28,7 +28,7 @@ export default function Navbar() {
   ];
 
   return (
-    <main className="sticky top-0">
+    <main className="sticky top-0 z-[9999]">
       <nav className="flex justify-between px-8 items-center py-3 bg-black/90">
         <div className="flex items-center gap-8">
           <section className="flex items-center gap-4">
@@ -38,7 +38,7 @@ export default function Navbar() {
               className="text-3xl cursor-pointer lg:hidden text-white"
             />
             {/* logo */}
-            <Link to="/" className="w-32 mr-48">
+            <Link to="/" className="w-32 lg:mr-24">
               <img src="/logo.png" alt="" />
             </Link>
           </section>
@@ -58,7 +58,7 @@ export default function Navbar() {
         {/* sidebar mobile menu */}
         <div
           className={clsx(
-            " fixed h-full w-screen lg:hidden bg-black/50 top-0 right-0 -translate-x-full  transition-all z-10 ",
+            " fixed h-full w-screen lg:hidden bg-black/50 top-0 right-0 -translate-x-full  transition-all z-[9999] ",
             isSideMenuOpen && "translate-x-0"
           )}
         >
@@ -84,7 +84,10 @@ export default function Navbar() {
 
         {/* last section */}
         <section className="flex items-center gap-4">
-          <Link to="/signup" className="text-white font-semibold no-underline">
+          <Link
+            to="/signup"
+            className="hidden lg:block text-white font-semibold no-underline"
+          >
             BECOME A SELLER
           </Link>
           {/* cart icon */}

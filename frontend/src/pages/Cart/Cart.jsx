@@ -54,7 +54,7 @@ const Cart = () => {
             <CartItem key={item.id} item={item} />
           ))}
         </main>
-        <aside className="my-14 lg:my-24 mx-auto lg:mx-24 w-80 h-fit col-span-3 p-6 rounded-md drop-shadow-lg bg-white">
+        <aside className="my-14 lg:my-24 mx-auto lg:mx-24 w-80 h-fit col-span-3 p-6 rounded-md relative drop-shadow-lg bg-white">
           <h2 className="text-lg font-semibold">Order Summary</h2>
           <div className="flex items-center justify-between mt-4">
             <span>Subtotal</span>
@@ -109,10 +109,6 @@ const Cart = () => {
                   <span>Coupon Discount </span>
                   <span>-₹{couponDiscount}</span>
                 </div>
-                <div className="flex items-center justify-between mt-4">
-                  <span>Grand Total</span>
-                  <span>₹{total - couponDiscount}</span>
-                </div>
               </>
             ) : (
               <div className="flex items-center justify-between px-2 py-2 text-red-600 bg-red-100 border border-red-200 rounded-md">
@@ -130,6 +126,14 @@ const Cart = () => {
                 </button>
               </div>
             ))}
+          <div className="flex items-center justify-between mt-4">
+            <span>Grand Total</span>
+            {isValidCoupon ? (
+              <span>₹{total - couponDiscount}</span>
+            ) : (
+              <span>₹{total}</span>
+            )}
+          </div>
           <Link to="/checkout">
             <button className="w-full py-2 mt-4 text-white bg-black/90 rounded-md">
               Proceed to Checkout

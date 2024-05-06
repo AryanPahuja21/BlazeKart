@@ -14,7 +14,7 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="flex justify-between my-4 lg:ml-10 px-4 py-3 rounded-md drop-shadow-lg bg-white">
+    <div className="flex justify-between my-4 lg:ml-10 px-4 py-3 rounded-md relative drop-shadow-lg bg-white">
       <div className="flex">
         <img src={image} alt="" className="w-24 mr-4 h-24 rounded-md" />
         <div>
