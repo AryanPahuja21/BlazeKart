@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Error from "./assets/error.png";
 import Logo from "/logo.png";
+import Button from "../../components/ui/Button";
 
 const NotFound = () => {
   return (
@@ -12,11 +13,8 @@ const NotFound = () => {
         Oops! The page you are looking for does not exist.
       </p>
       <img src={Error} alt="Error" />
-      <Link
-        to="/"
-        className="bg-gradient-to-br from-yellow-300 to-yellow-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded no-underline"
-      >
-        Go to Homepage
+      <Link to="/">
+        <Button value="Go to Homepage" />
       </Link>
     </div>
   );

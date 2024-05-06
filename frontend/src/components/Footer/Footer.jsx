@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div>
-      <footer className="bg-black/90 mt-14 grid grid-cols-5 ">
+      <footer className="bg-black/90 mt-14 grid grid-cols-1 lg:grid-cols-5 ">
         <div className="col-span-2 mx-auto my-24">
           <img src="/logo.png" alt="BlazeKart" className="w-64" />
           {/* <h1 className="text-white text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-tr from-yellow-200 to-yellow-800">
