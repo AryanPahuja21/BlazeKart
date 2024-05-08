@@ -7,9 +7,18 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emptyFieldWarning, setEmptyFieldWarning] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setEmptyFieldWarning(false);
+    setLoginError("");
+    if (!email || !password) {
+      setEmptyFieldWarning(true);
+      return;
+    }
+
     try {
       const response = await axios.post(
         "http://localhost:8000/api/v1/users/login",
@@ -21,7 +30,11 @@ const Login = () => {
       console.log(response.data);
       navigate("/");
     } catch (err) {
-      console.error(err);
+      if (err.response && err.response.status === 401) {
+        setLoginError("Incorrect user credentials");
+      } else {
+        console.error(err);
+      }
     }
   };
 
@@ -31,6 +44,10 @@ const Login = () => {
       <div className="flex justify-center items-center h-screen">
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <h2 className="text-2xl font-bold mb-6">Login</h2>
+          {emptyFieldWarning && (
+            <p className="text-red-500 mb-4">Please fill in all fields</p>
+          )}
+          {loginError && <p className="text-red-500 mb-4">{loginError}</p>}
           <form action="POST">
             <div className="mb-4">
               <label
