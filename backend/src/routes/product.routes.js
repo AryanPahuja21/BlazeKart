@@ -4,6 +4,7 @@ import {
   createProduct,
   deleteProduct,
   getAllProducts,
+  getLatestProducts,
   getProduct,
   updateProduct,
 } from "../controllers/product.controller.js";
@@ -14,7 +15,7 @@ const router = Router();
 
 router
   .route("/")
-  .get(getAllProducts)
+  .get(getLatestProducts)
   .post(
     upload.fields([
       {
@@ -24,6 +25,8 @@ router
     ]),
     createProduct
   );
+
+router.route("/all").get(getAllProducts);
 
 router
   .route("/:id")

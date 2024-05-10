@@ -9,6 +9,14 @@ const getAllProducts = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, products));
 });
 
+const getLatestProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find().sort({ createdAt: -1 }).limit(5);
+  if (!products) {
+    throw new ApiError(404, "No products found");
+  }
+  res.status(200).json(new ApiResponse(200, products));
+});
+
 const getProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (!product) {
@@ -49,11 +57,11 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (!product) {
     throw new ApiError(404, "Product not found");
   }
-  const images = req.files?.imageUrl?.map((file) => file.path);
-  const imageUrls = await uploadOnCloudinary(images[0]);
+  const productImageLocalPath = req.files?.imageUrl[0].path;
+  const productImage = await uploadOnCloudinary(productImageLocalPath);
   const updatedProduct = await Product.findByIdAndUpdate(
     req.params.id,
-    { ...req.body, imageUrl: imageUrls },
+    { ...req.body, imageUrl: productImage.url },
     { new: true }
   );
   res.status(200).json(new ApiResponse(200, updatedProduct));
@@ -70,6 +78,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 export {
   getAllProducts,
+  getLatestProducts,
   getProduct,
   createProduct,
   updateProduct,
