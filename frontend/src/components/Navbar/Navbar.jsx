@@ -16,16 +16,12 @@ export default function Navbar() {
       link: "/explore",
     },
     {
+      labe: "Top Categories",
+      link: "/categories",
+    },
+    {
       labe: "Top Deals Today",
-      link: "/top-deals",
-    },
-    {
-      labe: "About",
-      link: "#",
-    },
-    {
-      labe: "Contact",
-      link: "#",
+      link: "/deals",
     },
   ];
 
@@ -60,8 +56,8 @@ export default function Navbar() {
         {/* sidebar mobile menu */}
         <div
           className={clsx(
-            " fixed h-full w-screen lg:hidden bg-black/50 top-0 right-0 -translate-x-full transition-all z-[9999] ",
-            isSideMenuOpen && "translate-x-0"
+            " fixed h-full w-screen lg:hidden top-0 right-0 -translate-x-full transition-all z-[9999] ",
+            isSideMenuOpen && "translate-x-0 backdrop-blur-sm"
           )}
         >
           <section className="text-white bg-black/80 flex-col absolute left-0 top-0 h-screen p-8 gap-8 z-50 w-56 flex  ">

@@ -27,11 +27,11 @@ const Card = () => {
   }, []);
 
   return (
-    <div className="my-14 mx-8 grid grid-cols-4 gap-5">
+    <div className="my-14 mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {products.map((product) => (
         <div
           key={product._id}
-          className="w-full max-w-sm h-92 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden"
+          className="w-full mx-auto max-w-sm h-92 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden"
         >
           <Link to="#">
             <img

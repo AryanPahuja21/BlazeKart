@@ -3,7 +3,9 @@ import Spinner from "./assets/spinner.gif";
 
 const Loader = () => {
   return (
-    <img src={Spinner} className="w-20 h-20 mx-auto mt-[42vh]" alt="Loading" />
+    <div className="bg-white h-screen flex justify-center items-center">
+      <img src={Spinner} className="w-42 h-42" alt="Loading" />
+    </div>
   );
 };
 
