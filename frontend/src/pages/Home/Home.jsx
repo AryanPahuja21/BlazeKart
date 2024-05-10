@@ -13,7 +13,7 @@ const Home = () => {
         <h1 className="text-4xl text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-600 font-bold mx-5 mt-7 p-2">
           Latest and Trending Products
         </h1>
-        <Card />
+        <Card route={"/"} />
       </div>
       <Footer />
     </div>

@@ -5,7 +5,7 @@ import { ApiResponse } from "../utils/apiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const getAllProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find();
+  const products = await Product.find().sort({ name: 1 });
   res.status(200).json(new ApiResponse(200, products));
 });
 

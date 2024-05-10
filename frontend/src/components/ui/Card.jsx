@@ -7,14 +7,14 @@ const handleAddToCart = () => {
   console.log("Added to cart");
 };
 
-const Card = () => {
+const Card = ({ route }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_SERVER_URL}/api/v1/products/`
+          `${import.meta.env.VITE_SERVER_URL}/api/v1/products${route}`
         );
         console.log("Products:", response.data.data);
         setProducts(response.data.data);
