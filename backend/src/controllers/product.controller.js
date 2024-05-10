@@ -18,10 +18,30 @@ const getProduct = asyncHandler(async (req, res) => {
 });
 
 const createProduct = asyncHandler(async (req, res) => {
-  const images = req.files.images.map((file) => file.path);
-  const imageUrls = await uploadOnCloudinary(images);
-  const product = await Product.create({ ...req.body, imageUrl: imageUrls });
-  res.status(201).json(new ApiResponse(201, product));
+  const productImageLocalPath = req.files?.imageUrl[0].path;
+
+  if (!productImageLocalPath) {
+    throw new ApiError(400, "Product image is required");
+  }
+
+  const productImage = await uploadOnCloudinary(productImageLocalPath);
+
+  if (!productImage) {
+    throw new ApiError(500, "Failed to upload product image");
+  }
+
+  const product = await Product.create({
+    ...req.body,
+    imageUrl: productImage.url,
+  });
+
+  if (!product) {
+    throw new ApiError(500, "Failed to create product");
+  }
+
+  res
+    .status(201)
+    .json(new ApiResponse(201, product, "Product created successfully"));
 });
 
 const updateProduct = asyncHandler(async (req, res) => {
@@ -29,8 +49,8 @@ const updateProduct = asyncHandler(async (req, res) => {
   if (!product) {
     throw new ApiError(404, "Product not found");
   }
-  const images = req.files.images.map((file) => file.path);
-  const imageUrls = await uploadOnCloudinary(images);
+  const images = req.files?.imageUrl?.map((file) => file.path);
+  const imageUrls = await uploadOnCloudinary(images[0]);
   const updatedProduct = await Product.findByIdAndUpdate(
     req.params.id,
     { ...req.body, imageUrl: imageUrls },

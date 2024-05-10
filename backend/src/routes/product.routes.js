@@ -16,10 +16,12 @@ router
   .route("/")
   .get(getAllProducts)
   .post(
-    upload.fields({
-      name: "images",
-      maxCount: 10,
-    }),
+    upload.fields([
+      {
+        name: "imageUrl",
+        maxCount: 1,
+      },
+    ]),
     createProduct
   );
 
@@ -27,10 +29,12 @@ router
   .route("/:id")
   .get(getProduct)
   .put(
-    upload.fields({
-      name: "images",
-      maxCount: 10,
-    }),
+    upload.fields([
+      {
+        name: "imageUrl",
+        maxCount: 10,
+      },
+    ]),
     updateProduct
   )
   .delete(deleteProduct);

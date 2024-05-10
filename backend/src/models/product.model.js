@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
-    required: [true, "Please enter product image"],
+    required: [true, "Please upload product image"],
   },
   category: {
     type: String,
