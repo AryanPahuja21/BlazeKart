@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Carousel from "../../components/Carousel/Carousel";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -14,6 +15,11 @@ const Home = () => {
           Latest and Trending Products
         </h1>
         <Card route={"/"} />
+        <Link to={"/explore"}>
+          <p className="w-fit mx-auto bg-gray-600 px-4 py-3 font-bold text-white rounded-lg hover:bg-gray-500 cursor-pointer">
+            View More
+          </p>
+        </Link>
       </div>
       <Footer />
     </div>

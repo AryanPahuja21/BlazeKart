@@ -70,7 +70,7 @@ const Explore = () => {
                 <h3 className="uppercase mt-5 font-bold underline text-yellow-600">
                   Categories
                 </h3>
-                <ul className="cursor-pointer mb-10">
+                <ul className="cursor-pointer mb-8">
                   <li
                     className={category === "all" ? "font-bold" : ""}
                     onClick={() => handleCategoryClick("all")}
@@ -100,6 +100,12 @@ const Explore = () => {
                     onClick={() => handleCategoryClick("footwear")}
                   >
                     Footwear
+                  </li>
+                  <li
+                    className={category === "kids" ? "font-bold" : ""}
+                    onClick={() => handleCategoryClick("kids")}
+                  >
+                    Kids
                   </li>
                   <li
                     className={category === "accessories" ? "font-bold" : ""}
