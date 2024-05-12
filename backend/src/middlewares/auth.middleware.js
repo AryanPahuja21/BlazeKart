@@ -1,7 +1,14 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiError } from "../utils/apiError.js";
+import { ApiError } from "../utils/ApiError.js";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
+
+export const admin = asyncHandler(async (req, _, next) => {
+  if (req.user.role !== "admin") {
+    throw new ApiError(403, "Unauthorized request");
+  }
+  next();
+});
 
 export const verifyJWT = asyncHandler(async (req, _, next) => {
   try {
