@@ -42,26 +42,13 @@ const Card = () => {
     },
   ];
 
-  const handleCategory = async (categoryName) => {
-    try {
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_SERVER_URL
-        }/api/v1/products/category/${categoryName}`
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
-    <div className="">
-      <div className=" my-14 mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="lg:mx-14">
+      <div className=" my-14 mx-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {data.map((category) => (
           <div
             key={category.name}
-            className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto"
+            className="max-w-sm my-4 bg-gradient-to-b from-orange-400 to-green-300 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto"
           >
             <a href="#">
               <img
@@ -82,7 +69,6 @@ const Card = () => {
               <Link
                 to={`/products/${category.name}`}
                 className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-600 "
-                onClick={() => handleCategory(category.name)}
               >
                 Shop Now
                 <svg

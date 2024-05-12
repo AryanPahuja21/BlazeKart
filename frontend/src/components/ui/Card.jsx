@@ -16,7 +16,6 @@ const Card = ({ route }) => {
         const response = await axios.get(
           `${import.meta.env.VITE_SERVER_URL}/api/v1/products${route}`
         );
-        console.log("Products:", response.data.data);
         setProducts(response.data.data);
       } catch (error) {
         console.error("Error fetching products:", error);
