@@ -5,6 +5,7 @@ import {
   deleteProduct,
   getAllProducts,
   getLatestProducts,
+  getProductByCategory,
   getProduct,
   updateProduct,
 } from "../controllers/product.controller.js";
@@ -41,5 +42,7 @@ router
     updateProduct
   )
   .delete(deleteProduct);
+
+router.route("/category/:category").get(getProductByCategory);
 
 export default router;

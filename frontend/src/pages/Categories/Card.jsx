@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Electronics from "./assets/electronics.png";
 import HomeAppliances from "./assets/home-appliances.png";
 import Clothing from "./assets/clothing.png";
@@ -41,6 +42,19 @@ const Card = () => {
     },
   ];
 
+  const handleCategory = async (categoryName) => {
+    try {
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_SERVER_URL
+        }/api/v1/products/category/${categoryName}`
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="">
       <div className=" my-14 mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -68,6 +82,7 @@ const Card = () => {
               <Link
                 to={`/products/${category.name}`}
                 className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-600 "
+                onClick={() => handleCategory(category.name)}
               >
                 Shop Now
                 <svg

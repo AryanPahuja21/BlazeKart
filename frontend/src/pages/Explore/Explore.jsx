@@ -46,7 +46,7 @@ const Explore = () => {
                 filters && "translate-x-0"
               )}
             >
-              <div className="m-5 border border-black bg-gradient-to-br from-white to-yellow-300 p-14 rounded-md">
+              <div className="m-5 border border-black bg-gradient-to-br from-white to-gray-600 p-14 rounded-md">
                 <h3 className="uppercase mt-5 font-bold underline text-yellow-600">
                   Max Price
                 </h3>

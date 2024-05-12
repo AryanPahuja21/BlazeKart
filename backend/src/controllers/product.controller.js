@@ -17,6 +17,14 @@ const getLatestProducts = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, products));
 });
 
+const getProductByCategory = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: req.params.category });
+  if (!products) {
+    throw new ApiError(404, "No products found");
+  }
+  res.status(200).json(new ApiResponse(200, products));
+});
+
 const getProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (!product) {
@@ -79,6 +87,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 export {
   getAllProducts,
   getLatestProducts,
+  getProductByCategory,
   getProduct,
   createProduct,
   updateProduct,
