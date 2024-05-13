@@ -21,11 +21,15 @@ const getAllProducts = asyncHandler(async (req, res) => {
   }
 
   if (category === "all") {
+    const totalCount = await Product.countDocuments({
+      price: { $lte: maxPrice },
+    });
+
     const products = await Product.find({ price: { $lte: maxPrice } })
       .sort(sort)
       .skip(Number(skip))
       .limit(Number(limit));
-    res.status(200).json(new ApiResponse(200, products));
+    res.status(200).json(new ApiResponse(200, products, totalCount));
   } else {
     if (category === "electronics") category = "Electronics";
     else if (category === "homeAppliances") category = "Home Appliances";
@@ -34,6 +38,11 @@ const getAllProducts = asyncHandler(async (req, res) => {
     else if (category === "kids") category = "Kids";
     else if (category === "accessories") category = "Accessories";
 
+    const totalCount = await Product.countDocuments({
+      category,
+      price: { $lte: maxPrice },
+    });
+
     const products = await Product.find({
       category,
       price: { $lte: maxPrice },
@@ -41,7 +50,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
       .sort(sort)
       .skip(Number(skip))
       .limit(Number(limit));
-    res.status(200).json(new ApiResponse(200, products));
+    res.status(200).json(new ApiResponse(200, products, totalCount));
   }
 });
 

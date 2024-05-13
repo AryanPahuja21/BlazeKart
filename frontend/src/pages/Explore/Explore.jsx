@@ -40,10 +40,8 @@ const Explore = () => {
           }/api/v1/products/all?${searchParams.toString()}`
         );
         setProducts(response.data.data);
-        console.log(response.data.data);
-        // DOUBT: How to get the total number of pages?
-        setTotalPages(Math.ceil(response.data.data.length / limit));
-        // setTotalPages(10);
+        console.log(response.data);
+        setTotalPages(Math.ceil(response.data.message / limit));
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -247,25 +245,33 @@ const Explore = () => {
             </button>
           </div>
         </section>
-        <div className="w-fit mx-auto mt-10">
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
-        <main className="relative">
-          <div className="absolute top-0 z-0 w-full">
-            <ProductCard products={products} />
-            <div className="w-fit mx-auto mb-14">
+        {totalPages > 0 ? (
+          <>
+            <div className="w-fit mx-auto mt-10">
               <Pagination
                 currentPage={page}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
               />
             </div>
-          </div>
-        </main>
+            <main className="relative">
+              <div className="absolute top-0 z-0 w-full">
+                <ProductCard products={products} />
+                <div className="w-fit mx-auto mb-14">
+                  <Pagination
+                    currentPage={page}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                  />
+                </div>
+              </div>
+            </main>
+          </>
+        ) : (
+          <h1 className="text-4xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-t from-red-700 to-blue-500 my-64">
+            No Products Found
+          </h1>
+        )}
       </div>
     </>
   );
