@@ -1,24 +1,80 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
+import axios from "axios";
 import { FiSearch } from "react-icons/fi";
 import Navbar from "../../components/Navbar/Navbar";
-import Card from "../../components/ui/Card";
+import ProductCard from "./ProductCard";
+import Pagination from "../../components/Pagination/Pagination";
+import { useSearchParams } from "react-router-dom";
 
 const Explore = () => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [category, setCategory] = useState("all");
-  const [stock, setStock] = useState();
   const [maxPrice, setMaxPrice] = useState(1000000);
   const [filters, setFilters] = useState(false);
   const [page, setPage] = useState(1);
+  const [products, setProducts] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSortByClick = (sort) => {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get("page") || 1;
+    const sort = params.get("sort") || "";
+    const category = params.get("category") || "all";
+    const maxPrice = params.get("maxPrice") || 1000000;
+    setPage(parseInt(page));
     setSort(sort);
+    setCategory(category);
+    setMaxPrice(parseInt(maxPrice));
+  }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_SERVER_URL
+          }/api/v1/products/all?${searchParams.toString()}`
+        );
+        setProducts(response.data.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, [searchParams]);
+
+  const handleSortByClick = (sortValue) => {
+    setSort(sortValue);
+    setSearchParams({
+      page: page.toString(),
+      limit: "15",
+      sort: sortValue,
+      category,
+    });
   };
 
-  const handleCategoryClick = (category) => {
-    setCategory(category);
+  const handleCategoryClick = (categoryValue) => {
+    setCategory(categoryValue);
+    setSearchParams({
+      page: page.toString(),
+      limit: "15",
+      sort,
+      category: categoryValue,
+    });
+  };
+
+  const handleMaxPriceChange = (value) => {
+    setMaxPrice(value);
+    setSearchParams({
+      page: page.toString(),
+      limit: "15",
+      sort,
+      category,
+      maxPrice: value.toString(),
+    });
   };
 
   const filtersOpen = () => {
@@ -56,7 +112,7 @@ const Explore = () => {
                   min={100}
                   max={1000000}
                   value={maxPrice}
-                  onChange={(e) => setMaxPrice(Number(e.target.value))}
+                  onChange={(e) => handleMaxPriceChange(Number(e.target.value))}
                   className="slider appearance-none lg:w-52 h-1 bg-yellow-800 rounded-full mt-2 mb-7"
                   style={{
                     background:
@@ -173,12 +229,17 @@ const Explore = () => {
             </button>
           </div>
         </section>
-
-        <div className="relative">
-          <main className="absolute top-0 z-0 w-full">
-            <Card route={"/all"} />
-          </main>
+        <div className="w-fit mx-auto mt-10">
+          <Pagination />
         </div>
+        <main className="relative">
+          <div className="absolute top-0 z-0 w-full">
+            <ProductCard products={products} />
+            <div className="w-fit mx-auto mb-14">
+              <Pagination />
+            </div>
+          </div>
+        </main>
       </div>
     </>
   );

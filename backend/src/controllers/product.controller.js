@@ -5,12 +5,48 @@ import { ApiResponse } from "../utils/apiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 
 const getAllProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find().sort({ name: 1 });
-  res.status(200).json(new ApiResponse(200, products));
+  let { page, limit, sort, maxPrice = 1000000, category = "all" } = req.query;
+  let skip = (page - 1) * limit;
+
+  if (!sort) {
+    sort = {};
+  } else if (sort === "latest") {
+    sort = { createdAt: -1 };
+  } else if (sort === "lowToHigh") {
+    sort = { price: 1 };
+  } else if (sort === "highToLow") {
+    sort = { price: -1 };
+  } else if (sort === "alphabetically") {
+    sort = { name: 1 };
+  }
+
+  if (category === "all") {
+    const products = await Product.find({ price: { $lte: maxPrice } })
+      .sort(sort)
+      .skip(Number(skip))
+      .limit(Number(limit));
+    res.status(200).json(new ApiResponse(200, products));
+  } else {
+    if (category === "electronics") category = "Electronics";
+    else if (category === "homeAppliances") category = "Home Appliances";
+    else if (category === "clothing") category = "Clothing";
+    else if (category === "footwear") category = "Footwear";
+    else if (category === "kids") category = "Kids";
+    else if (category === "accessories") category = "Accessories";
+
+    const products = await Product.find({
+      category,
+      price: { $lte: maxPrice },
+    })
+      .sort(sort)
+      .skip(Number(skip))
+      .limit(Number(limit));
+    res.status(200).json(new ApiResponse(200, products));
+  }
 });
 
 const getLatestProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find().sort({ createdAt: -1 }).limit(5);
+  const products = await Product.find().sort({ createdAt: -1 }).limit(15);
   if (!products) {
     throw new ApiError(404, "No products found");
   }

@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { Order } from "../models/order.model.js";
 import { User } from "../models/user.model.js";
+import { reduceStock } from "../utils/featuers.js";
 
 const getAllOrders = asyncHandler(async (req, res) => {
   const orders = await Order.find().sort({ createdAt: -1 });
@@ -51,6 +52,9 @@ const createOrder = asyncHandler(async (req, res) => {
   if (!order) {
     throw new ApiError(500, "Failed to create order");
   }
+
+  await reduceStock(orderItems);
+  1;
   res
     .status(201)
     .json(new ApiResponse(201, order, "Order created successfully"));
