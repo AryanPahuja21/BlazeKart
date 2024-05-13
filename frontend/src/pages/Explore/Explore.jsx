@@ -41,9 +41,9 @@ const Explore = () => {
         );
         setProducts(response.data.data);
         console.log(response.data.data);
-        //DOUBT: How to get the total number of pages?
-        // setTotalPages(Math.ceil(response.data.data.length / limit));
-        setTotalPages(10);
+        // DOUBT: How to get the total number of pages?
+        setTotalPages(Math.ceil(response.data.data.length / limit));
+        // setTotalPages(10);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
