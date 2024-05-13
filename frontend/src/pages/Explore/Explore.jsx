@@ -14,8 +14,10 @@ const Explore = () => {
   const [maxPrice, setMaxPrice] = useState(1000000);
   const [filters, setFilters] = useState(false);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [products, setProducts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const limit = 15;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -23,10 +25,10 @@ const Explore = () => {
     const sort = params.get("sort") || "";
     const category = params.get("category") || "all";
     const maxPrice = params.get("maxPrice") || 1000000;
-    setPage(parseInt(page));
     setSort(sort);
     setCategory(category);
     setMaxPrice(parseInt(maxPrice));
+    setPage(parseInt(page));
   }, []);
 
   useEffect(() => {
@@ -38,6 +40,10 @@ const Explore = () => {
           }/api/v1/products/all?${searchParams.toString()}`
         );
         setProducts(response.data.data);
+        console.log(response.data.data);
+        //DOUBT: How to get the total number of pages?
+        // setTotalPages(Math.ceil(response.data.data.length / limit));
+        setTotalPages(10);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -45,6 +51,16 @@ const Explore = () => {
 
     fetchProducts();
   }, [searchParams]);
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    setSearchParams(() => ({
+      page: pageNumber.toString(),
+      limit: "15",
+      sort,
+      category,
+    }));
+  };
 
   const handleSortByClick = (sortValue) => {
     setSort(sortValue);
@@ -110,16 +126,16 @@ const Explore = () => {
                 <input
                   type="range"
                   min={100}
-                  max={1000000}
+                  max={100000}
                   value={maxPrice}
                   onChange={(e) => handleMaxPriceChange(Number(e.target.value))}
                   className="slider appearance-none lg:w-52 h-1 bg-yellow-800 rounded-full mt-2 mb-7"
                   style={{
                     background:
                       "linear-gradient(to right, #f00 0%, #f00 " +
-                      (maxPrice - 100) / 10000 +
+                      (maxPrice - 100) / 1000 +
                       "%, #fff " +
-                      (maxPrice - 100) / 10000 +
+                      (maxPrice - 100) / 1000 +
                       "%, #fff 100%)",
                   }}
                 />
@@ -185,7 +201,9 @@ const Explore = () => {
             </h3>
             <ul className="cursor-pointer flex gap-7">
               <li
-                className={sort === "latest" ? "font-bold text-yellow-500" : ""}
+                className={
+                  sort === "latest" ? "font-bold text-yellow-500 mr-2" : ""
+                }
                 onClick={() => handleSortByClick("latest")}
               >
                 Latest
@@ -230,13 +248,21 @@ const Explore = () => {
           </div>
         </section>
         <div className="w-fit mx-auto mt-10">
-          <Pagination />
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
         <main className="relative">
           <div className="absolute top-0 z-0 w-full">
             <ProductCard products={products} />
             <div className="w-fit mx-auto mb-14">
-              <Pagination />
+              <Pagination
+                currentPage={page}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
         </main>

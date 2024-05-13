@@ -1,14 +1,31 @@
-import React from "react";
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const pageNumbers = [];
 
-const Pagination = () => {
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
+  const handlePrevClick = () => {
+    if (currentPage > 1) {
+      onPageChange(currentPage - 1);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (currentPage < totalPages) {
+      onPageChange(currentPage + 1);
+    }
+  };
+
   return (
     <div>
       <nav aria-label="Page navigation example">
         <ul className="flex items-center -space-x-px h-10 text-base">
           <li>
-            <a
-              href="#"
+            <button
               className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              onClick={handlePrevClick}
+              disabled={currentPage === 1}
             >
               <span className="sr-only">Previous</span>
               <svg
@@ -26,53 +43,27 @@ const Pagination = () => {
                   d="M5 1 1 5l4 4"
                 />
               </svg>
-            </a>
+            </button>
           </li>
+          {pageNumbers.map((pageNumber) => (
+            <li key={pageNumber}>
+              <button
+                className={`flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${
+                  pageNumber === currentPage
+                    ? "z-10 text-blue-600 border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                    : ""
+                }`}
+                onClick={() => onPageChange(pageNumber)}
+              >
+                {pageNumber}
+              </button>
+            </li>
+          ))}
           <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              1
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              2
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              aria-current="page"
-              className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-            >
-              3
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              4
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-            >
-              5
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
+            <button
               className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+              onClick={handleNextClick}
+              disabled={currentPage === totalPages}
             >
               <span className="sr-only">Next</span>
               <svg
@@ -90,7 +81,7 @@ const Pagination = () => {
                   d="m1 9 4-4-4-4"
                 />
               </svg>
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
