@@ -21,7 +21,12 @@ const generateAccessAndRefreshToken = async (userId) => {
 };
 
 const registerUser = asyncHandler(async (req, res) => {
+  console.log("Request body:", req.body);
+  console.log("Request files:", req.files.avatar);
   const { fullname, email, username, password } = req.body;
+  const avatarLocalPath = req.files?.avatar?.[0]?.path;
+  console.log("Avatar local path:", avatarLocalPath);
+
   if (
     [fullname, email, username, password].some((field) => field?.trim() === "")
   ) {
@@ -34,8 +39,6 @@ const registerUser = asyncHandler(async (req, res) => {
   if (existedUser) {
     throw new ApiError(409, "User with same email or username already exists");
   }
-
-  const avatarLocalPath = req.files?.avatar?.[0]?.path;
 
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar is required");

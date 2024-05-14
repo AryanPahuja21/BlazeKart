@@ -10,6 +10,12 @@ const Categories = lazy(() => import("./pages/Categories/Categories"));
 const Category = lazy(() => import("./pages/Category/Category"));
 const Cart = lazy(() => import("./pages/Cart/Cart"));
 const Checkout = lazy(() => import("./pages/Checkout/Checkout"));
+const AdminLogin = lazy(() =>
+  import("./pages/Admin/Authentication/AdminLogin")
+);
+const AdminSignup = lazy(() =>
+  import("./pages/Admin/Authentication/AdminSignup")
+);
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 function App() {
@@ -25,6 +31,11 @@ function App() {
           <Route path="/products/:category" element={<Category />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/admin" element={<Home />}>
+            <Route path="login" element={<AdminLogin />} />
+            <Route path="signup" element={<AdminSignup />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
