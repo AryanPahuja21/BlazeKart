@@ -78,24 +78,24 @@ export default function Navbar() {
               </Link>
             ))}
             <div>
-              <Link
+              {/* <Link
                 to="/signup"
                 className="text-white hover:text-yellow-300 font-semibold no-underline"
               >
                 BECOME A SELLER
-              </Link>
+              </Link> */}
             </div>
           </section>
         </div>
 
         {/* last section */}
         <section className="flex items-center gap-4">
-          <Link
+          {/* <Link
             to="/signup"
             className="hidden lg:block text-white hover:text-yellow-300 mx-4 font-semibold no-underline"
           >
             BECOME A SELLER
-          </Link>
+          </Link> */}
           {/* cart icon */}
           <Link to="/cart" className="relative hover:scale-125">
             <AiOutlineShoppingCart className="text-2xl text-yellow-300 mx-4 cursor-pointer" />
