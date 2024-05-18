@@ -99,7 +99,7 @@ const ScratchCard = () => {
     <div className="flex items-center justify-center">
       <div className="base absolute z-0">
         <h4 className="font-bold text-blue-500 relative">
-          You won a coupon code to of flat 10% discount on your order
+          You won a coupon code of flat 10% discount on your order
           <p className="w-fit mx-auto text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-500 to-blue-700">
             "{prizeValue}"
           </p>

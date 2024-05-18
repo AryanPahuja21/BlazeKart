@@ -14,10 +14,10 @@ const Explore = () => {
   const [maxPrice, setMaxPrice] = useState(1000000);
   const [filters, setFilters] = useState(false);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [length, setLength] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [products, setProducts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const limit = 15;
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -40,8 +40,9 @@ const Explore = () => {
           }/api/v1/products/all?${searchParams.toString()}`
         );
         setProducts(response.data.data);
+        setLength(response.data.message);
+        setTotalPages(Math.ceil(response.data.message / 15));
         console.log(response.data);
-        setTotalPages(Math.ceil(response.data.message / limit));
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -94,6 +95,14 @@ const Explore = () => {
   const filtersOpen = () => {
     setFilters(!filters);
   };
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  useEffect(() => {
+    setTotalPages(Math.ceil(filteredProducts.length / 15));
+  }, [search]);
 
   return (
     <>
@@ -256,7 +265,7 @@ const Explore = () => {
             </div>
             <main className="relative">
               <div className="absolute top-0 z-0 w-full">
-                <ProductCard products={products} />
+                <ProductCard products={filteredProducts} />
                 <div className="w-fit mx-auto mb-14">
                   <Pagination
                     currentPage={page}
