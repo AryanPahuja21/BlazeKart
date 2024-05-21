@@ -6,10 +6,27 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoCloseOutline } from "react-icons/io5";
 import Button from "../ui/Button";
 
+function getUser() {
+  let user = localStorage.getItem("user");
+  if (user) {
+    user = JSON.parse(user);
+  } else {
+    user = null;
+  }
+  return user;
+}
+
 export default function Navbar() {
+  const [user, setUser] = useState(getUser());
   const [isSideMenuOpen, setMenu] = useState(false);
-  const user = false;
+  const [dropdown, setDropdown] = useState(false);
   const quantity = 2;
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+
   const navlinks = [
     {
       labe: "Explore",
@@ -109,12 +126,29 @@ export default function Navbar() {
               className="h-10 w-10 rounded-full border-2 border-yellow-300 cursor-pointer"
               src="https://i.pravatar.cc/150?img=52"
               alt="avatar-img"
+              onClick={() => setDropdown(!dropdown)}
             />
           ) : (
             <Link to="/login">
               <Button value="Login" />
             </Link>
           )}
+          {user && dropdown ? (
+            <div className="absolute top-16 right-5 bg-white shadow-md py-4 w-44 rounded-lg border-2 border-yellow-300">
+              <Link
+                to="/my-orders"
+                className="block text-black py-2 px-8 hover:bg-gray-100"
+              >
+                My Orders
+              </Link>
+              <p
+                className="block text-black py-2 px-8 hover:bg-gray-100 cursor-pointer"
+                onClick={handleLogout}
+              >
+                Logout
+              </p>
+            </div>
+          ) : null}
           {/* avtar img */}
         </section>
       </nav>
