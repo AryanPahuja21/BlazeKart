@@ -9,7 +9,6 @@ export const loginUser = createAsyncThunk(
       `${server}/api/v1/users/login`,
       userCredentials
     );
-    console.log(response.data.data);
     localStorage.setItem("user", JSON.stringify(response.data.data));
     return response.data.data;
   }

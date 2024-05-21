@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Loader from "./components/Loader/Loader";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { useSelector } from "react-redux";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const Login = lazy(() => import("./pages/Authentication/Login"));
@@ -20,6 +22,8 @@ const AdminSignup = lazy(() =>
 const NotFound = lazy(() => import("./pages/NotFound/NotFound"));
 
 function App() {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <Router>
       <Suspense fallback={<Loader />}>
@@ -29,15 +33,21 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/deals" element={<Deals />} />
           <Route path="/products/:category" element={<Category />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
           <Route path="/admin" element={<Home />}>
             <Route path="login" element={<AdminLogin />} />
             <Route path="signup" element={<AdminSignup />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+
+          {/* Protected Routes */}
+          <Route element={<ProtectedRoute isAuthenticated={user} />}>
+            {/* TODO: Add Toasts */}
+            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/deals" element={<Deals />} />
+          </Route>
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
