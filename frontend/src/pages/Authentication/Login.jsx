@@ -1,41 +1,37 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../../components/Navbar/Navbar";
+import { loginUser } from "../../redux/reducer/userReducer";
 
 const Login = () => {
-  const navigate = useNavigate();
+  //Local States
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emptyFieldWarning, setEmptyFieldWarning] = useState(false);
-  const [loginError, setLoginError] = useState("");
+
+  //Redux States
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { loading, error } = useSelector((state) => state.user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEmptyFieldWarning(false);
-    setLoginError("");
     if (!email || !password) {
       setEmptyFieldWarning(true);
       return;
     }
 
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/api/v1/users/login`,
-        {
-          email,
-          password,
-        }
-      );
-      console.log(response.data);
-      navigate("/");
-    } catch (err) {
-      if (err.response && err.response.status === 401) {
-        setLoginError("Incorrect user credentials");
-      } else {
-        console.error(err);
+    let userCredentials = {
+      email,
+      password,
+    };
+    dispatch(loginUser(userCredentials)).then((data) => {
+      if (data.payload) {
+        navigate("/");
       }
-    }
+    });
   };
 
   return (
@@ -48,7 +44,7 @@ const Login = () => {
             {emptyFieldWarning && (
               <p className="text-red-500 mb-4">Please fill in all fields</p>
             )}
-            {loginError && <p className="text-red-500 mb-4">{loginError}</p>}
+            {error && <p className="text-red-500 mb-4">{error}</p>}
             <form action="POST">
               <div className="mb-4">
                 <label
@@ -88,7 +84,7 @@ const Login = () => {
                   type="submit"
                   onClick={handleSubmit}
                 >
-                  Login
+                  {loading ? "Loading..." : "Login"}
                 </button>
               </div>
               <div className="mt-2">

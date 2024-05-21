@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import userReducer from "./reducer/userReducer";
 
-export const server = import.meta.env.SERVER_URL;
-console.log(server);
+export const server = import.meta.env.VITE_SERVER_URL;
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    user: userReducer,
+  },
 });
