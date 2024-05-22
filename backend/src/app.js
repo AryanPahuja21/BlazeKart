@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-// import morgan from "morgan";
+import morgan from "morgan";
 
 import userRouter from "./routes/user.routes.js";
 import productRouter from "./routes/product.routes.js";
@@ -20,7 +20,7 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cookieParser());
-// app.use(morgan("dev"));
+app.use(morgan("tiny"));
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);

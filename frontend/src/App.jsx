@@ -44,6 +44,7 @@ function App() {
           {/* Protected Routes */}
           <Route element={<ProtectedRoute isAuthenticated={user} />}>
             {/* TODO: Add Toasts */}
+
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/deals" element={<Deals />} />
           </Route>

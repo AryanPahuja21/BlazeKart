@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoCloseOutline } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa";
 import Button from "../ui/Button";
 
 function getUser() {
@@ -114,7 +115,7 @@ export default function Navbar() {
             BECOME A SELLER
           </Link> */}
           {/* cart icon */}
-          <Link to="/cart" className="relative hover:scale-125">
+          <Link to="/cart" className="relative hover:scale-110">
             <AiOutlineShoppingCart className="text-2xl text-yellow-300 mx-4 cursor-pointer" />
             <div className="w-3 h-3 text-[8px] font-bold text-white flex justify-center items-center bg-red-700 rounded-full border border-red-400 absolute top-0 right-3">
               {quantity > 0 && quantity}
@@ -122,11 +123,9 @@ export default function Navbar() {
           </Link>
           {/* TODO: Add cart quantity red icon on the top right of cart icon */}
           {user ? (
-            <img
-              className="h-10 w-10 rounded-full border-2 border-yellow-300 cursor-pointer"
-              src="https://i.pravatar.cc/150?img=52"
-              alt="avatar-img"
+            <FaRegUser
               onClick={() => setDropdown(!dropdown)}
+              className="text-xl text-yellow-300 cursor-pointer hover:scale-110"
             />
           ) : (
             <Link to="/login">
