@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/reducer/cartReducer.js";
 import Button from "../../components/ui/Button";
 
 const ProductCard = ({ products }) => {
-  const [cart, setCart] = useState([]);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const handleAddToCart = (productId) => {
-    setCart((prevCart) =>
-      prevCart.includes(productId)
-        ? prevCart.filter((id) => id !== productId)
-        : [...prevCart, productId]
-    );
+    if (cart.includes(productId)) {
+      dispatch(removeFromCart(productId));
+    } else {
+      dispatch(addToCart(productId));
+    }
   };
 
   return (

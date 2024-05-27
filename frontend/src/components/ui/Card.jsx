@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/reducer/cartReducer.js";
 import Button from "./Button.jsx";
 
 const Card = ({ route }) => {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,11 +26,11 @@ const Card = ({ route }) => {
   }, [route]);
 
   const handleAddToCart = (productId) => {
-    setCart((prevCart) =>
-      prevCart.includes(productId)
-        ? prevCart.filter((id) => id !== productId)
-        : [...prevCart, productId]
-    );
+    if (cart.includes(productId)) {
+      dispatch(removeFromCart(productId));
+    } else {
+      dispatch(addToCart(productId));
+    }
   };
   return (
     <div className="my-14 mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
