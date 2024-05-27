@@ -3,12 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Button from "./Button.jsx";
 
-const handleAddToCart = () => {
-  console.log("Added to cart");
-};
-
 const Card = ({ route }) => {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,8 +20,15 @@ const Card = ({ route }) => {
     };
 
     fetchProducts();
-  }, []);
+  }, [route]);
 
+  const handleAddToCart = (productId) => {
+    setCart((prevCart) =>
+      prevCart.includes(productId)
+        ? prevCart.filter((id) => id !== productId)
+        : [...prevCart, productId]
+    );
+  };
   return (
     <div className="my-14 mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {products.map((product) => (
@@ -50,8 +54,15 @@ const Card = ({ route }) => {
               <span className="text-3xl font-bold text-gray-900 dark:text-white">
                 ₹{product.price}
               </span>
-              <div className="cursor-pointer" onClick={handleAddToCart}>
-                <Button value="Add to Cart" />
+              <div
+                className="cursor-pointer"
+                onClick={() => handleAddToCart(product._id)}
+              >
+                {cart.includes(product._id) ? (
+                  <Button value="Added" />
+                ) : (
+                  <Button value="Add to Cart" />
+                )}
               </div>
             </div>
           </div>

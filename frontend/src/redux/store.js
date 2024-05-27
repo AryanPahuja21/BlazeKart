@@ -6,5 +6,6 @@ export const server = import.meta.env.VITE_SERVER_URL;
 export const store = configureStore({
   reducer: {
     user: userReducer,
+    cart: cartReducer,
   },
 });

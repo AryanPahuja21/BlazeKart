@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/ui/Button";
 
 const ProductCard = ({ products }) => {
-  const handleAddToCart = () => {
-    console.log("Added to cart");
+  const [cart, setCart] = useState([]);
+
+  const handleAddToCart = (productId) => {
+    setCart((prevCart) =>
+      prevCart.includes(productId)
+        ? prevCart.filter((id) => id !== productId)
+        : [...prevCart, productId]
+    );
   };
 
   return (
@@ -33,8 +39,15 @@ const ProductCard = ({ products }) => {
                 <span className="text-3xl font-bold text-gray-900 dark:text-white">
                   ₹{product.price}
                 </span>
-                <div className="cursor-pointer" onClick={handleAddToCart}>
-                  <Button value="Add to Cart" />
+                <div
+                  className="cursor-pointer"
+                  onClick={() => handleAddToCart(product._id)}
+                >
+                  {cart.includes(product._id) ? (
+                    <Button value="Added" />
+                  ) : (
+                    <Button value="Add to Cart" />
+                  )}
                 </div>
               </div>
             </div>
