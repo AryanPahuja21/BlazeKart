@@ -12,10 +12,13 @@ const Cart = () => {
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems);
 
-  const subTotal = 4000;
+  const subTotal = cartItems.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
   const tax = Math.round(subTotal * 0.18);
-  const shippingCharges = 200;
-  const discount = 400;
+  const shippingCharges = subTotal > 1000 ? 0 : 100;
+  const discount = subTotal > 5000 ? 500 : 0;
   const total = subTotal + tax + shippingCharges - discount;
   const couponDiscount = Math.round(total * 0.1);
 

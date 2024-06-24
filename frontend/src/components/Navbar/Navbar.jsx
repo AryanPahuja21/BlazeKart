@@ -39,6 +39,10 @@ export default function Navbar() {
       labe: "Top Categories",
       link: "/categories",
     },
+    {
+      labe: "Top Deals Today",
+      link: "/deals",
+    },
   ];
 
   return (
