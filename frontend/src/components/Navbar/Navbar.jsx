@@ -39,10 +39,6 @@ export default function Navbar() {
       labe: "Top Categories",
       link: "/categories",
     },
-    {
-      labe: "Top Deals Today",
-      link: "/deals",
-    },
   ];
 
   return (
@@ -56,7 +52,7 @@ export default function Navbar() {
               className="text-3xl cursor-pointer lg:hidden text-white"
             />
             {/* logo */}
-            <Link to="/" className="w-32 lg:mr-24">
+            <Link to="/" className="w-32 lg:mr-96">
               <img src="/logo.png" alt="" />
             </Link>
           </section>
@@ -136,12 +132,12 @@ export default function Navbar() {
           )}
           {user && dropdown ? (
             <div className="absolute top-16 right-5 bg-white shadow-md py-4 w-44 rounded-lg border-2 border-yellow-300">
-              <Link
+              {/* <Link
                 to="/my-orders"
                 className="block text-black py-2 px-8 hover:bg-gray-100"
               >
                 My Orders
-              </Link>
+              </Link> */}
               <p
                 className="block text-black py-2 px-8 hover:bg-gray-100 cursor-pointer"
                 onClick={handleLogout}
