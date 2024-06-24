@@ -6,17 +6,18 @@ import CartItem from "./CartItem";
 import Navbar from "../../components/Navbar/Navbar";
 import { useSelector } from "react-redux";
 
-const subTotal = 4000;
-const tax = Math.round(subTotal * 0.18);
-const shippingCharges = 200;
-const discount = 400;
-const total = subTotal + tax + shippingCharges - discount;
-const couponDiscount = Math.round(total * 0.1);
-
 const Cart = () => {
   const [couponCode, setCouponCode] = useState("");
   const [isValidCoupon, setIsValidCoupon] = useState(false);
   const cartItems = useSelector((state) => state.cart);
+  console.log(cartItems);
+
+  const subTotal = 4000;
+  const tax = Math.round(subTotal * 0.18);
+  const shippingCharges = 200;
+  const discount = 400;
+  const total = subTotal + tax + shippingCharges - discount;
+  const couponDiscount = Math.round(total * 0.1);
 
   useEffect(() => {
     if (couponCode === "DIWALI DHAMAKA" || couponCode === "HAPPY HOURS") {
@@ -34,6 +35,11 @@ const Cart = () => {
           <h1 className="text-2xl font-bold text-black/70 w-fit sm:mx-auto mt-12 lg:ml-10">
             My Cart
           </h1>
+          {cartItems.length === 0 && (
+            <h1 className="text-4xl font-bold text-red-800 flex justify-center items-center h-[70vh] w-full mt-12 lg:ml-10">
+              No items in cart
+            </h1>
+          )}
           {cartItems.map((item) => (
             <CartItem key={item.id} item={item} />
           ))}

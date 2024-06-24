@@ -5,10 +5,25 @@ const cartSlice = createSlice({
   initialState: [],
   reducers: {
     addToCart: (state, action) => {
-      state.push(action.payload);
+      const existingItem = state.find(
+        (item) => item._id === action.payload._id
+      );
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        state.push({ ...action.payload, quantity: 1 });
+      }
     },
     removeFromCart: (state, action) => {
-      return state.filter((productId) => productId !== action.payload);
+      const existingItem = state.find(
+        (item) => item._id === action.payload._id
+      );
+      if (existingItem) {
+        existingItem.quantity -= 1;
+        if (existingItem.quantity === 0) {
+          return state.filter((item) => item._id !== action.payload._id);
+        }
+      }
     },
   },
 });

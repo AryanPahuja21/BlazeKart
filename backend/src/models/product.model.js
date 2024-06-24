@@ -25,6 +25,10 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter product count in stock"],
   },
+  quantity: {
+    type: Number,
+    default: 1,
+  },
 });
 
 export const Product = mongoose.model("Product", productSchema);

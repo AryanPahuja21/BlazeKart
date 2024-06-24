@@ -1,22 +1,31 @@
 import React, { useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
+import { useDispatch } from "react-redux";
+import { addToCart, removeFromCart } from "../../redux/reducer/cartReducer";
 
 const CartItem = ({ item }) => {
-  const { name, price, quantity, stock, image } = item;
+  const { name, price, imageUrl, stock, quantity } = item;
   const [itemQuantity, setItemQuantity] = useState(quantity);
+  const dispatch = useDispatch();
 
-  const handleSubtract = () => {
+  const handleSubtract = (e) => {
     itemQuantity > 1 && setItemQuantity(itemQuantity - 1);
+    dispatch(removeFromCart(e));
   };
 
-  const handleAdd = () => {
+  const handleAdd = (e) => {
     itemQuantity < stock && setItemQuantity(itemQuantity + 1);
+    dispatch(addToCart(e));
+  };
+
+  const removeFromCart = (e) => {
+    dispatch(removeFromCart(e));
   };
 
   return (
     <div className="flex justify-between my-4 lg:ml-10 px-4 py-3 rounded-md relative drop-shadow-lg bg-white">
       <div className="flex">
-        <img src={image} alt="" className="w-24 mr-4 h-24 rounded-md" />
+        <img src={imageUrl} alt="" className="w-24 mr-4 h-24 rounded-md" />
         <div>
           <h3 className="font-bold lg:text-xl">{name}</h3>
           <p className="lg:text-lg">₹{price}</p>
@@ -25,7 +34,7 @@ const CartItem = ({ item }) => {
       <div className="flex items-center">
         <button
           className="border border-gray-300 rounded-md px-2 py-1 lg:mr-2"
-          onClick={handleSubtract}
+          onClick={() => handleSubtract(item)}
         >
           -
         </button>
@@ -34,11 +43,14 @@ const CartItem = ({ item }) => {
         </button>
         <button
           className="border border-gray-300 rounded-md px-2 py-1 mr-2"
-          onClick={handleAdd}
+          onClick={() => handleAdd(item)}
         >
           +
         </button>
-        <button className="p-2 bg-red-500 text-white rounded-md">
+        <button
+          className="p-2 bg-red-500 text-white rounded-md"
+          onClick={() => removeFromCart(item)}
+        >
           {<RiDeleteBin5Line />}
         </button>
       </div>
