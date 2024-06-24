@@ -4,25 +4,8 @@ import { VscError } from "react-icons/vsc";
 import { SiTicktick } from "react-icons/si";
 import CartItem from "./CartItem";
 import Navbar from "../../components/Navbar/Navbar";
+import { useSelector } from "react-redux";
 
-const cartItems = [
-  {
-    id: 1,
-    name: "Apple iPhone 12",
-    price: 79999,
-    quantity: 1,
-    stock: 5,
-    image: "https://source.unsplash.com/featured/?iphone",
-  },
-  {
-    id: 2,
-    name: "Apple Watch Series 6",
-    price: 39999,
-    quantity: 1,
-    stock: 3,
-    image: "https://source.unsplash.com/featured/?applewatch",
-  },
-];
 const subTotal = 4000;
 const tax = Math.round(subTotal * 0.18);
 const shippingCharges = 200;
@@ -33,6 +16,7 @@ const couponDiscount = Math.round(total * 0.1);
 const Cart = () => {
   const [couponCode, setCouponCode] = useState("");
   const [isValidCoupon, setIsValidCoupon] = useState(false);
+  const cartItems = useSelector((state) => state.cart);
 
   useEffect(() => {
     if (couponCode === "DIWALI DHAMAKA" || couponCode === "HAPPY HOURS") {

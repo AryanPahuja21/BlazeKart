@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 const CartItem = ({ item }) => {
-  const { id, name, price, quantity, stock, image } = item;
+  const { name, price, quantity, stock, image } = item;
   const [itemQuantity, setItemQuantity] = useState(quantity);
 
   const handleSubtract = () => {

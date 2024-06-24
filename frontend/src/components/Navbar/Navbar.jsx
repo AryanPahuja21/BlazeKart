@@ -6,6 +6,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import Button from "../ui/Button";
+import { useSelector } from "react-redux";
 
 function getUser() {
   let user = localStorage.getItem("user");
@@ -22,6 +23,7 @@ export default function Navbar() {
   const [isSideMenuOpen, setMenu] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const quantity = 2;
+  const cart = useSelector((state) => state.cart);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -117,8 +119,8 @@ export default function Navbar() {
           {/* cart icon */}
           <Link to="/cart" className="relative hover:scale-110">
             <AiOutlineShoppingCart className="text-2xl text-yellow-300 mx-4 cursor-pointer" />
-            <div className="w-3 h-3 text-[8px] font-bold text-white flex justify-center items-center bg-red-700 rounded-full border border-red-400 absolute top-0 right-3">
-              {quantity > 0 && quantity}
+            <div className="w-4 h-4 text-[10px] font-bold text-white flex justify-center items-center bg-red-700 rounded-full border border-red-400 absolute top-[-5px] right-2">
+              {cart.length}
             </div>
           </Link>
           {/* TODO: Add cart quantity red icon on the top right of cart icon */}

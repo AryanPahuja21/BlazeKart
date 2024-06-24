@@ -7,12 +7,12 @@ import Button from "../../components/ui/Button";
 const ProductCard = ({ products }) => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-
-  const handleAddToCart = (productId) => {
-    if (cart.includes(productId)) {
-      dispatch(removeFromCart(productId));
+  console.log(cart);
+  const handleAddToCart = (product) => {
+    if (cart.includes(product)) {
+      dispatch(removeFromCart(product));
     } else {
-      dispatch(addToCart(productId));
+      dispatch(addToCart(product));
     }
   };
 
@@ -21,7 +21,7 @@ const ProductCard = ({ products }) => {
       <div className="my-14 mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {products.map((product) => (
           <div
-            key={product._id}
+            key={product}
             className="w-full mx-auto max-w-sm h-92 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden"
           >
             <Link to="#">
@@ -44,9 +44,9 @@ const ProductCard = ({ products }) => {
                 </span>
                 <div
                   className="cursor-pointer"
-                  onClick={() => handleAddToCart(product._id)}
+                  onClick={() => handleAddToCart(product)}
                 >
-                  {cart.includes(product._id) ? (
+                  {cart.includes(product) ? (
                     <Button value="Added" />
                   ) : (
                     <Button value="Add to Cart" />
