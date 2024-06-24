@@ -17,7 +17,7 @@ const Cart = () => {
     0
   );
   const tax = Math.round(subTotal * 0.18);
-  const shippingCharges = subTotal > 1000 ? 0 : 100;
+  const shippingCharges = subTotal < 1000 && subTotal > 0 ? 100 : 0;
   const discount = subTotal > 5000 ? 500 : 0;
   const total = subTotal + tax + shippingCharges - discount;
   const couponDiscount = Math.round(total * 0.1);
