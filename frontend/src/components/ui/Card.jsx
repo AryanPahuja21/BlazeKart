@@ -36,7 +36,7 @@ const Card = ({ route }) => {
     <div className="my-14 mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {products.map((product) => (
         <div
-          key={product}
+          key={product._id}
           className="w-full mx-auto max-w-sm h-92 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden"
         >
           <Link to="#">
@@ -61,11 +61,7 @@ const Card = ({ route }) => {
                 className="cursor-pointer"
                 onClick={() => handleAddToCart(product)}
               >
-                {cart.includes(product) ? (
-                  <Button value="Added" />
-                ) : (
-                  <Button value="Add to Cart" />
-                )}
+                <Button value="Add to Cart" />
               </div>
             </div>
           </div>

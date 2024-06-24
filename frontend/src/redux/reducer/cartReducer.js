@@ -21,7 +21,7 @@ const cartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity -= 1;
         if (existingItem.quantity === 0) {
-          return state.filter((item) => item._id !== action.payload._id);
+          state.filter((item) => item._id !== action.payload);
         }
       }
     },

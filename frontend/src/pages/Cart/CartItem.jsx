@@ -18,7 +18,7 @@ const CartItem = ({ item }) => {
     dispatch(addToCart(e));
   };
 
-  const removeFromCart = (e) => {
+  const handleRemove = (e) => {
     dispatch(removeFromCart(e));
   };
 
@@ -49,7 +49,7 @@ const CartItem = ({ item }) => {
         </button>
         <button
           className="p-2 bg-red-500 text-white rounded-md"
-          onClick={() => removeFromCart(item)}
+          onClick={() => handleRemove(item)}
         >
           {<RiDeleteBin5Line />}
         </button>

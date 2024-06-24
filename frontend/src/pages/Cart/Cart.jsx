@@ -40,9 +40,10 @@ const Cart = () => {
               No items in cart
             </h1>
           )}
-          {cartItems.map((item) => (
-            <CartItem key={item.id} item={item} />
-          ))}
+          {cartItems.map(
+            (item) =>
+              item.quantity > 0 && <CartItem key={item._id} item={item} />
+          )}
         </main>
         <aside className="my-14 lg:my-24 mx-auto lg:mx-24 w-80 h-fit col-span-3 p-6 rounded-md relative drop-shadow-lg bg-white">
           <h2 className="text-lg font-semibold">Order Summary</h2>
